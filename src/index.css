@@ -1,0 +1,75 @@
+/* 1. VARIABLES GLOBALES (El secreto del Look & Feel) */
+:root {
+  /* Colores Gen Z (Neones suaves) */
+  --neon-cyan: #00f2fe;
+  --neon-purple: #667eea;
+  --neon-pink: #ff0844;
+  --neon-orange: #ffb199;
+  
+  /* Texturas Apple (Glassmorphism) */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-blur: blur(20px) saturate(180%);
+  
+  /* Sombras y físicas */
+  --ios-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
+  --ios-radius: 24px; /* Curva continua estilo Apple */
+}
+
+/* 2. RESET Y TIPOGRAFÍA NATIVA */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Llama a la fuente de Apple directamente si están en Mac/iOS, sino usa un fallback limpio */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Suavizado de fuentes (CRUCIAL para que se vea "caro") */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Mesh Gradient Animado (Fondo explosivo pero oscuro) */
+  background-color: #0b0c10;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(102, 126, 234, 0.3), transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(255, 8, 68, 0.25), transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(0, 242, 254, 0.25), transparent 50%);
+  background-attachment: fixed;
+  animation: bgBreathe 15s ease-in-out infinite alternate;
+  
+  min-height: 100vh;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Animación de respiración del fondo */
+@keyframes bgBreathe {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* 3. FÍSICAS DE BOTONES GLOBALES */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Curva de animación iOS */
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button:active {
+  /* En Apple, los botones se hunden, no rebotan raro */
+  transform: scale(0.96); 
+  filter: brightness(0.9);
+}
